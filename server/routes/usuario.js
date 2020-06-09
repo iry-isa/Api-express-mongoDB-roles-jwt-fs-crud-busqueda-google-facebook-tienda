@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
-const { verificaToken, verificaAdmin_Role, verificaADMIN_o_MismoUsuario, } = require('../middlewares/autenticacion');
+const date = require('../routes/date');
+
+const { verificaToken, verificaAdmin_Role, verificaADMIN_o_MismoUsuario } = require('../middlewares/autenticacion');
 
 const app = express();
 
@@ -46,7 +48,7 @@ app.get('/usuario', verificaToken, verificaAdmin_Role, (req, res) => {
 
 });
 
-app.post('/usuario', [verificaToken, verificaAdmin_Role, verificaADMIN_o_MismoUsuario], function(req, res) {
+app.post('/usuario', (req, res) => {
 
     let body = req.body;
 
@@ -54,7 +56,9 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role, verificaADMIN_o_MismoUs
         username: body.username,
         email: body.email,
         password: bcrypt.hashSync(body.password, 10),
-        role: body.role
+        role: body.role,
+
+
     });
 
 
@@ -88,7 +92,8 @@ app.post('/', (req, res) => {
         email: body.email,
         password: bcrypt.hashSync(body.password, 10),
         img: body.img,
-        role: body.role
+        role: body.role,
+
     });
 
     usuario.save((err, usuarioGuardado) => {

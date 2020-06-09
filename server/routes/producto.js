@@ -49,7 +49,7 @@ app.get('/productos/:id', (req, res) => {
     // populate: usuario categoria
     // paginado
     let id = req.params.id;
-
+    let body = req.body;
     Producto.findById(id)
         .populate('usuario', 'username email')
         .populate('categoria', 'nombre')

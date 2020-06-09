@@ -1,4 +1,4 @@
-function date (req, res, next){
+function date(req, res, next) {
     console.log('Time: ', Date.now())
     next()
 }

@@ -159,6 +159,7 @@ app.put('/articulos/:id', [verificaToken, verificaADMIN_o_MismoUsuario], (req, r
     let id = req.params.id;
     let body = req.body;
 
+
     Articulo.findById(id, (err, articuloDB) => {
 
         if (err) {
@@ -210,6 +211,7 @@ app.put('/articulos/:id', [verificaToken, verificaADMIN_o_MismoUsuario], (req, r
 app.delete('/articulos/:id', [verificaToken, verificaADMIN_o_MismoUsuario], (req, res) => {
 
     let id = req.params.id;
+    console.log(id);
 
     Articulo.findById(id, (err, articuloDB) => {
 

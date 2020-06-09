@@ -10,6 +10,7 @@ app.use(require('./seccion'));
 app.use(require('./articulo'));
 app.use(require('./upload'));
 app.use(require('./imagenes'));
+app.use(require('./date'));
 
 
 

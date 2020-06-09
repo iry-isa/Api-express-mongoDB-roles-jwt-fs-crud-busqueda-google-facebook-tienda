@@ -52,8 +52,8 @@ let usuarioSchema = new Schema({
         default: false
     },
 
+    date: { type: Date, default: Date.now }
 
-    fecha_registro: { type: Date, required: true },
 });
 
 
@@ -68,6 +68,8 @@ usuarioSchema.methods.toJSON = function() {
 
 
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
+
+
 
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

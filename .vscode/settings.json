@@ -1,0 +1,16 @@
+{
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "COMMA_PARENTHESIS_WHITESPACE",
+            "sentence": "^\\Q-Login google  -Base de datos mongoDB utilizando los metodos de mongoose para crear, leer,actualizar y borrar.\\E$"
+        },
+        {
+            "rule": "A_PLURAL",
+            "sentence": "^\\QEl acceso esta restringido a traves de un middleware.\\E$"
+        },
+        {
+            "rule": "SENTENCE_WHITESPACE",
+            "sentence": "^\\QEl acceso esta restringido a traves de un middleware.\\E$"
+        }
+    ]
+}
