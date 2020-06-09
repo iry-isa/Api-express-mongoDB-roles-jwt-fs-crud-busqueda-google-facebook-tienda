@@ -127,7 +127,8 @@ app.post('/articulos', verificaToken, (req, res) => {
         titulo: body.titulo,
         descripcion: body.descripcion,
         disponible: body.disponible,
-        seccion: body.seccion
+        seccion: body.seccion,
+
     });
 
     articulo.save((err, articuloDB) => {
@@ -180,6 +181,7 @@ app.put('/articulos/:id', [verificaToken, verificaADMIN_o_MismoUsuario], (req, r
         articuloDB.seccion = body.seccion;
         articuloDB.disponible = body.disponible;
         articuloDB.descripcion = body.descripcion;
+        articuloDB.id = req.usuario.id
 
         articuloDB.save((err, articuloGuardado) => {
 

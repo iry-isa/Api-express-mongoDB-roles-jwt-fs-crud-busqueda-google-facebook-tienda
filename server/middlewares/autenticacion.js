@@ -1,4 +1,6 @@
-const jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
+var Usuario = require('../models/usuario');
+
 var SEED = require('../config/config').SEED;
 
 // =====================
@@ -51,7 +53,7 @@ let verificaAdmin_Role = (req, res, next) => {
 // =====================
 // Verifica El mismo usuario o admin
 // =====================
-let = verificaADMIN_o_MismoUsuario = (req, res, next) => {
+let verificaADMIN_o_MismoUsuario = (req, res, next) => {
 
     let usuario = req.usuario;
     var id = req.params.id;
@@ -61,7 +63,6 @@ let = verificaADMIN_o_MismoUsuario = (req, res, next) => {
 
     if (usuario.role === 'ADMIN_ROLE' || usuario._id === id) {
         next();
-
 
         return;
     } else {
@@ -73,6 +74,7 @@ let = verificaADMIN_o_MismoUsuario = (req, res, next) => {
         });
 
     }
+
 
 
 };
