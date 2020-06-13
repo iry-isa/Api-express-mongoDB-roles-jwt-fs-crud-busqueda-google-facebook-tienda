@@ -8,8 +8,7 @@
     <title>Google Sign-In Demo</title>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <meta name="google-signin-client_id" content="100395307531-a4pbbmhgtc58tdnfhc0vjt2rg1af93pd.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="219758474264-vh1bibcphgvbc32km508lubtqkanikf1.apps.googleusercontent.com">
 
 </head>
 
@@ -57,7 +56,75 @@
 
         }
     </script>
+    <!--Facebook versión básica del SDK donde las opciones se configuran con sus valores predeterminados -->
 
+    <a id="loginbtn" onclick="javascript:loginWithFacebook()">Login con Facebook</a></div>
+
+    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"> </div>
+
+
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '569549163988497',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.2'
+            });
+
+            FB.AppEvents.logPageView();
+            fbSDKLoaded()
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script',
+            'facebook-sdk'));
+
+
+        document.getElementById = ('loginbtn').addEventListener('click', loginWithFacebook, false);
+
+        function loginWithFacebook() {
+
+            FB.login(response => {
+                const {
+                    authResponse: {
+                        accessToken,
+                        userId
+                    }
+                } = response
+                fetch('/login-with-facebook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application / json '
+                    },
+                    body: JSON.stringify({
+                        accessToken,
+                        userId
+                    })
+                }).then(res => {
+                    console.log(res)
+                })
+                FB.api('/me', function(response) {
+                    console.log(JSON.stringify(response));
+                });
+
+            }, {
+                scope: 'public_profile,email'
+            })
+            return false
+        }
+    </script>
+
+
+    <script src="/public/index"></script>
 </body>
 
 </html>

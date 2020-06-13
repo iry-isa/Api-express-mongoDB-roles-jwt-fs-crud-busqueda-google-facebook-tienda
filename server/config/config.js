@@ -34,14 +34,20 @@ if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/tienda';
 } else {
     urlDB = process.env.MONGO_URI;
+
 }
 process.env.URLDB = urlDB;
 
 // ============================
 //  Google Client ID
 // ============================
-process.env.CLIENT_ID = process.env.CLIENT_ID || '100395307531-a4pbbmhgtc58tdnfhc0vjt2rg1af93pd.apps.googleusercontent.com';
+process.env.CLIENT_ID = process.env.CLIENT_ID || '219758474264-vh1bibcphgvbc32km508lubtqkanikf1.apps.googleusercontent.com';
 
+
+// === === === === === === === === === =
+//  Facebook Client ID
+// ============================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '637490933510063';
 
 //mongodb:mongodb://localhost:27017/tienda
-//mongodb:mongodb+srv://iryisa:<password>@tienda-vafjd.mongodb.net/tienda
+//mongodb:mongodb+srv://<usuario>:<password>@tienda-vafjd.mongodb.net/tienda

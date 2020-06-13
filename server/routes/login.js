@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken');
 
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
-
 const Usuario = require('../models/usuario');
-const mdAutenticacion = require('../middlewares/autenticacion');
+
+
+
 
 const app = express();
 
@@ -89,7 +90,6 @@ function obtenerMenu(ROLE) {
                 // { titulo: 'Usuarios', url: '/usuarios' },
                 { titulo: 'Categorias', url: '/categorias' },
                 { titulo: 'Productos', url: '/productos' },
-                { titulo: 'Categoria', url: '/categoria' },
                 { titulo: 'Articulos', url: '/articulos' }
             ]
         }
@@ -151,13 +151,14 @@ app.post('/google', async(req, res) => {
             });
         };
 
+
         if (usuarioDB) {
 
-            if (usuarioDB.google === false) {
-                return res.status(400).json({
-                    ok: false,
+            if (usuarioDB.google === true) {
+                return res.status(200).json({
+                    ok: true,
                     err: {
-                        message: 'Debe de usar su autenticación normal'
+                        message: 'Bienvenido de nuevo'
                     }
                 });
             } else {
@@ -215,14 +216,42 @@ app.post('/google', async(req, res) => {
 
 });
 
+//  configuraciones de facebook
 
 
+app.post('/login-with-facebook', async(req, res) => {
+    const { accessToken, usuarioID } = req.body
 
-facebookOAuth: async(req, res, next) => {
-        //generate token
-        const token = signToken(req.user);
-        res.status(200).json({ token });
-    },
+    const response = await fetch(`https: //graph.facebook.com/v3.1/me?access_token${accessToken}&method=get&pretty=0&sdk=joey&supress_http_code=1`)
+    const json = await response.json()
+
+    if (json.id === usuarioID) {
+        //valid user
+        const resp = await usuario.findOne({ facebookID: usuarioID })
+        if (resp) {
+            res.json({ status: 'ok', data: 'estas conectado' })
+        } else {
+            const usuarioDB = new usuario({
+                username: 'nombre',
+                facebookID: usuarioID,
+                accessToken
+
+            })
+            await usuarioDB.save()
+            res.json({
+                status: 'ok',
+                data: 'Bienvenido otra vez'
+            })
+        }
+        //verifica si el usuario esta en la bd 
+    } else {
+        res.jon({
+                status: 'error',
+                data: 'usuario o contraseña incorrectos'
+            })
+            //no autorizado,mandar el error
+    }
+});
 
 
-    module.exports = app;
+module.exports = app;
