@@ -1,14 +1,14 @@
 {
-    "name": "apirestMongo_roles",
+    "name": "api-express-mongo_roles",
     "version": "1.0.0",
-    "description": "",
+    "description": "los usuarios se pueden registrar solos tanto con facebook como com google,los acceso a productos solo esta permitido para listar y listar por id,tienen permiso de publicar articulos pero no de borrar o modificar.",
     "main": "index.js",
     "scripts": {
         "start": "node server/server.js",
         "nodemon": "nodemon server/server.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Irina Isabela Buca",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^4.0.1",
